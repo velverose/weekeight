@@ -1,373 +1,433 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>BrightStudio — Креативный видеопродакшн</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>BrightStudio — креативный видеопродакшн</title>
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
 
   <style>
-    :root {
-      font-size: 62.5%; /* 1rem = 10px */
-      --accent: #ff6600;
-      --dark: #111;
-      --light: #f9f9f9;
+    /* ---------- BASE (rem: 1rem = 10px) ---------- */
+    html { font-size: 62.5%; } /* 1rem = 10px */
+    :root{
+      --bg: #ffffff;
+      --text: #0b1220;
+      --muted: #6b7280;
+      --accent-1: #ff6fa3;
+      --accent-2: #7c5cff;
+      --card-bg: rgba(255,255,255,0.95);
+      --radius: 1.4rem;
+      --container: 110rem;
+      --shadow-sm: 0 0.6rem 2rem rgba(2,6,23,0.08);
     }
 
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      color:var(--text);
+      background: linear-gradient(180deg,#fff 0%, #fbf7ff 100%);
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.55;
+      -webkit-font-feature-settings: "liga" 0;
     }
 
-    body {
-      font-family: "Poppins", sans-serif;
-      color: var(--dark);
-      background: var(--light);
-      overflow-x: hidden;
-      line-height: 1.6;
+    img{display:block;max-width:100%;height:auto;border-radius:1rem}
+    a{color:inherit;text-decoration:none}
+    .container{width:min(var(--container),92%);margin:0 auto}
+
+    /* ---------- HEADER ---------- */
+    .header{
+      position:sticky;top:0;z-index:80;
+      backdrop-filter: blur(.6rem) saturate(120%);
+      background: linear-gradient(180deg, rgba(255,255,255,0.86), rgba(255,255,255,0.7));
+      border-bottom: .1rem solid rgba(11,18,32,0.04);
     }
+    .header__inner{display:flex;align-items:center;justify-content:space-between;padding:1.6rem 0;gap:1.6rem}
+    .logo{display:flex;align-items:center;gap:1.2rem;font-weight:800;color:var(--accent-2);font-size:1.8rem}
+    .logo__mark{width:3.8rem;height:3.8rem;border-radius:1rem;background:linear-gradient(135deg,var(--accent-1),var(--accent-2));display:grid;place-items:center;color:#fff;font-weight:800;box-shadow:var(--shadow-sm)}
+    nav{display:flex;gap:1.2rem}
+    .nav__link{font-weight:600;color:var(--muted);padding:.6rem 1rem;border-radius:1rem;font-size:1.4rem}
+    .nav__link:hover{color:var(--text);background:rgba(124,92,255,0.06)}
+    .cta{display:inline-flex;background:linear-gradient(90deg,var(--accent-1),var(--accent-2));color:#fff;padding:.9rem 1.4rem;border-radius:1.2rem;font-weight:700;border:none;cursor:pointer;box-shadow:0 .8rem 2.4rem rgba(124,92,255,0.12);font-size:1.4rem}
 
-    header {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 2rem 6rem;
-      background: rgba(255,255,255,0.9);
-      backdrop-filter: blur(10px);
-      box-shadow: 0 0.2rem 1rem rgba(0,0,0,0.05);
-      z-index: 999;
-      transition: all 0.3s ease;
+    /* ---------- HERO ---------- */
+    .hero{
+      min-height:72vh;display:grid;grid-template-columns:1fr;gap:2.8rem;align-items:center;padding:6.4rem 0;
+      background:
+        radial-gradient(60rem 30rem at 10% 10%, rgba(255,111,154,0.10), transparent 6%),
+        radial-gradient(50rem 26rem at 95% 80%, rgba(124,92,255,0.08), transparent 6%),
+        linear-gradient(180deg,#fff,#fbf7ff 60%);
+      text-align:center;
+      background-attachment:scroll;
     }
+    .hero__inner{display:grid;gap:2.2rem;align-items:center}
+    .hero__eyebrow{color:var(--accent-2);font-weight:700;font-size:1.4rem;margin-bottom:.8rem;letter-spacing:.3px}
+    .hero__title{font-size:clamp(2.4rem,3.8vw,3.4rem);margin:0 0 1.2rem;line-height:1.06;color:#071029}
+    .hero__lead{color:var(--muted);margin:0 auto 1.8rem;font-size:1.6rem;max-width:68rem}
+    .hero__actions{display:flex;gap:1.2rem;justify-content:center;flex-wrap:wrap}
+    .hero__media{border-radius:1.6rem;overflow:hidden;box-shadow:0 2rem 5rem rgba(11,18,32,0.08);max-width:86rem;margin:0 auto}
+    .hero__media img{height:44rem;object-fit:cover;width:100%;border-radius:1.6rem}
 
-    .logo {
-      font-size: 2.4rem;
-      font-weight: 700;
-      color: var(--accent);
+    /* ---------- WHY ---------- */
+    .why{padding:6.4rem 0}
+    .section-title{font-size:clamp(2rem,2.4vw,2.4rem);color:#0b1220;margin:0 0 1.8rem;text-align:center}
+    .why__grid{display:grid;gap:1.8rem;margin-top:1.8rem;grid-template-columns:repeat(auto-fit,minmax(22rem,1fr))}
+    .why__card{background:var(--card-bg);border-radius:1.4rem;padding:1.8rem;box-shadow:var(--shadow-sm);display:flex;flex-direction:column;gap:1rem;align-items:start;transition:transform .18s ease}
+    .why__card:hover{transform:translateY(-0.6rem)}
+    .why__icon{width:5.6rem;height:5.6rem;border-radius:1.2rem;background:linear-gradient(135deg,var(--accent-1),var(--accent-2));display:grid;place-items:center;color:#fff;font-weight:800;font-size:2rem;flex-shrink:0}
+    .why__title{margin:0 0 .6rem;font-weight:700;font-size:1.6rem}
+    .why__text{margin:0;color:var(--muted);font-size:1.4rem}
+    .why__img{width:100%;border-radius:1rem;margin-top:1rem;height:16rem;object-fit:cover}
+
+    /* ---------- GALLERY ---------- */
+    .gallery{padding:4rem 0 6rem}
+    .gallery__grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.2rem}
+    .gallery__item{overflow:hidden;border-radius:1rem;background:#f6f6f8}
+    .gallery__item img{width:100%;height:16rem;object-fit:cover;display:block}
+    .gallery__caption{font-size:1.2rem;color:var(--muted);padding:.8rem}
+
+    /* ---------- REVIEWS ---------- */
+    .reviews{padding:6.4rem 0;background:linear-gradient(180deg, rgba(124,92,255,0.03), transparent 70%)}
+    .reviews__grid{display:grid;gap:1.8rem;grid-template-columns:repeat(auto-fit,minmax(26rem,1fr));margin-top:1.8rem}
+    .review{background:rgba(255,255,255,0.98);padding:1.6rem;border-radius:1.2rem;box-shadow:var(--shadow-sm);display:flex;gap:1rem;align-items:flex-start}
+    .review__avatar{width:5.4rem;height:5.4rem;border-radius:1.2rem;overflow:hidden;flex-shrink:0}
+    .review__meta{flex:1}
+    .review__name{margin:0;font-weight:700}
+    .review__role{margin:.4rem 0 0;color:var(--muted);font-size:1.3rem}
+    .review__text{margin:0 0 .6rem;color:#0b1220;font-size:1.4rem}
+
+    /* ---------- CONTACT ---------- */
+    .contact{padding:6.4rem 0}
+    .contact__wrap{display:grid;gap:1.8rem;grid-template-columns:1fr 42rem;align-items:start}
+    .contact__left{background:linear-gradient(180deg, rgba(124,92,255,0.06), rgba(255,111,154,0.04));padding:2rem;border-radius:1.2rem}
+    .contact__form{background:var(--card-bg);padding:1.8rem;border-radius:1.2rem;box-shadow:var(--shadow-sm)}
+    .field{display:flex;flex-direction:column;gap:.8rem;margin-bottom:1rem}
+    label{font-weight:600;font-size:1.4rem;color:#0b1220}
+    input,textarea{padding:1rem 1.2rem;border-radius:1rem;border:.1rem solid rgba(15,23,42,0.06);font:inherit;font-size:1.4rem;resize:vertical}
+    input:focus,textarea:focus{outline:none;box-shadow:0 .6rem 1.8rem rgba(124,92,255,0.08);border-color:rgba(124,92,255,0.3)}
+    .form-actions{display:flex;gap:1.2rem;align-items:center;margin-top:.6rem}
+    .note{font-size:1.3rem;color:var(--muted)}
+
+    /* ---------- MAP ---------- */
+    .map-wrap{border-radius:1rem;overflow:hidden;box-shadow:var(--shadow-sm)}
+    .map-iframe{width:100%;height:36rem;border:0;display:block;transform:scale(.98);opacity:0;transition:transform .9s ease,opacity .9s ease}
+    .map-iframe.visible{transform:scale(1);opacity:1}
+
+    /* ---------- FOOTER ---------- */
+    footer{border-top:.1rem solid rgba(11,18,32,0.04);padding:1.6rem 0;text-align:center;color:var(--muted);font-size:1.3rem}
+
+    /* ---------- REVEAL ---------- */
+    .reveal{opacity:0;transform:translateY(1.4rem);transition:transform .8s cubic-bezier(.2,.9,.2,1),opacity .8s ease}
+    .reveal.revealed{opacity:1;transform:translateY(0)}
+
+    /* ---------- RESPONSIVE ---------- */
+    @media(min-width:900px){
+      nav{display:flex}
+      .hero{grid-template-columns:1fr 52rem;padding:7.2rem 0}
+      .hero__media img{height:48rem}
+      .contact__wrap{grid-template-columns:1fr 42rem}
+      .gallery__grid{grid-template-columns:repeat(4,1fr)}
     }
-
-    nav ul {
-      display: flex;
-      list-style: none;
-      gap: 3rem;
+    @media(max-width:900px){
+      nav{display:none} /* keep header simple on small, could add burger later */
     }
-
-    nav a {
-      text-decoration: none;
-      color: var(--dark);
-      font-size: 1.6rem;
-      transition: color 0.3s;
+    @media(max-width:768px){
+      .hero{padding:5.2rem 0}
+      .why__grid{grid-template-columns:1fr 1fr}
+      .gallery__grid{grid-template-columns:repeat(2,1fr)}
+      .contact__wrap{grid-template-columns:1fr}
+      .map-iframe{height:28rem}
     }
-
-    nav a:hover {
-      color: var(--accent);
+    @media(max-width:480px){
+      .hero__title{font-size:2.2rem}
+      .hero__lead{font-size:1.4rem}
+      .gallery__grid{grid-template-columns:1fr}
+      .why__grid{grid-template-columns:1fr}
+      .review{flex-direction:column;gap:.8rem}
+      .hero__media img{height:26rem}
+      .map-iframe{height:22rem}
     }
-
-    /* HERO SECTION */
-    .hero {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      min-height: 100vh;
-      padding: 10rem 2rem 6rem;
-      text-align: center;
-      background: linear-gradient(135deg, #fff 50%, #ffe6cc);
-      background-attachment: fixed;
-    }
-
-    .hero__title {
-      font-size: 4.8rem;
-      margin-bottom: 2rem;
-      opacity: 0;
-      transform: translateY(3rem);
-      transition: all 1s ease;
-    }
-
-    .hero__lead {
-      font-size: 1.8rem;
-      color: #444;
-      max-width: 60rem;
-      margin-bottom: 3rem;
-      opacity: 0;
-      transform: translateY(3rem);
-      transition: all 1s ease 0.2s;
-    }
-
-    .btn {
-      background: var(--accent);
-      color: #fff;
-      padding: 1.4rem 3rem;
-      font-size: 1.6rem;
-      border-radius: 0.8rem;
-      text-decoration: none;
-      opacity: 0;
-      transform: translateY(3rem);
-      transition: all 1s ease 0.4s;
-    }
-
-    .btn:hover {
-      background: #e55c00;
-    }
-
-    /* SCROLL REVEAL BASE */
-    [data-reveal] {
-      opacity: 0;
-      transform: translateY(4rem);
-      transition: all 1s ease;
-    }
-    [data-reveal].visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    section {
-      padding: 8rem 6rem;
-    }
-
-    .why__grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 3rem;
-      text-align: center;
-    }
-
-    .why__item {
-      background: #fff;
-      border-radius: 1rem;
-      padding: 3rem 2rem;
-      box-shadow: 0 0.3rem 1rem rgba(0,0,0,0.05);
-      transition: transform 0.3s ease;
-    }
-
-    .why__item:hover {
-      transform: translateY(-0.5rem);
-    }
-
-    .why__icon {
-      width: 6rem;
-      height: 6rem;
-      fill: var(--accent);
-      margin-bottom: 2rem;
-    }
-
-    .reviews__grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 3rem;
-    }
-
-    .review {
-      background: #fff;
-      padding: 3rem;
-      border-radius: 1rem;
-      box-shadow: 0 0.3rem 1rem rgba(0,0,0,0.05);
-    }
-
-    .contact__wrap {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 3rem;
-    }
-
-    .contact__form {
-      background: #fff;
-      border-radius: 1rem;
-      padding: 3rem;
-      box-shadow: 0 0.3rem 1rem rgba(0,0,0,0.05);
-    }
-
-    input, textarea {
-      width: 100%;
-      padding: 1rem;
-      margin-bottom: 2rem;
-      border: 0.1rem solid #ddd;
-      border-radius: 0.5rem;
-      font-size: 1.4rem;
-    }
-
-    iframe {
-      width: 100%;
-      height: 45rem;
-      border: none;
-      border-radius: 1rem;
-      opacity: 0;
-      transform: scale(0.95);
-      transition: all 1s ease;
-    }
-    iframe.visible {
-      opacity: 1;
-      transform: scale(1);
-    }
-
-    footer {
-      background: var(--dark);
-      color: #fff;
-      text-align: center;
-      padding: 2rem;
-      font-size: 1.4rem;
-    }
-
-    /* АДАПТИВ */
-    @media (max-width: 1024px) {
-      section {
-        padding: 6rem 3rem;
-      }
-      .why__grid {
-        grid-template-columns: 1fr 1fr;
-      }
-      .contact__wrap {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    @media (max-width: 600px) {
-      header {
-        flex-direction: column;
-        padding: 1.6rem;
-      }
-
-      nav ul {
-        flex-direction: column;
-        gap: 1rem;
-      }
-
-      .hero__title {
-        font-size: 3.2rem;
-      }
-
-      .why__grid, .reviews__grid {
-        grid-template-columns: 1fr;
-      }
-
-      section {
-        padding: 5rem 2rem;
-      }
+    @media(max-width:320px){
+      .hero__title{font-size:1.9rem}
+      .hero__lead{font-size:1.2rem}
     }
   </style>
 </head>
-
 <body>
-
-  <header>
-    <div class="logo">BrightStudio</div>
-    <nav>
-      <ul>
-        <li><a href="#why">О нас</a></li>
-        <li><a href="#reviews">Отзывы</a></li>
-        <li><a href="#contact">Контакты</a></li>
-      </ul>
-    </nav>
-  </header>
-
-  <section class="hero">
-    <h1 class="hero__title">Создаём видео, которые вдохновляют</h1>
-    <p class="hero__lead">Мы превращаем ваши идеи в визуальные истории — от рекламы до короткометражек.</p>
-    <a href="#contact" class="btn">Связаться с нами</a>
-  </section>
-
-  <section id="why">
-    <h2 data-reveal style="text-align:center; font-size:3rem; margin-bottom:3rem;">Почему выбирают нас</h2>
-    <div class="why__grid">
-      <div class="why__item" data-reveal>
-        <svg class="why__icon"><use href="#icon-camera"></use></svg>
-        <h3>Профессиональное оборудование</h3>
-        <p>Мы используем только современные камеры и свет для идеального кадра.</p>
-      </div>
-      <div class="why__item" data-reveal>
-        <svg class="why__icon"><use href="#icon-edit"></use></svg>
-        <h3>Креативная команда</h3>
-        <p>Наши режиссёры и монтажёры найдут решение для любой идеи.</p>
-      </div>
-      <div class="why__item" data-reveal>
-        <svg class="why__icon"><use href="#icon-rocket"></use></svg>
-        <h3>Быстрая реализация</h3>
-        <p>Сдаём проекты точно в срок, сохраняя высочайшее качество.</p>
-      </div>
-    </div>
-  </section>
-
-  <section id="reviews">
-    <h2 data-reveal style="text-align:center; font-size:3rem; margin-bottom:3rem;">Отзывы клиентов</h2>
-    <div class="reviews__grid">
-      <div class="review" data-reveal>
-        <p>«Отличная команда! Сняли промо-видео для нашего стартапа за неделю. Качество на высоте!»</p>
-        <strong>— AidosTech</strong>
-      </div>
-      <div class="review" data-reveal>
-        <p>«BrightStudio помогли визуализировать наш бренд в новом свете. Отличная работа!»</p>
-        <strong>— CoffeeLab Astana</strong>
-      </div>
-    </div>
-  </section>
-
-  <section id="contact">
-    <h2 data-reveal style="text-align:center; font-size:3rem; margin-bottom:3rem;">Свяжитесь с нами</h2>
-    <div class="contact__wrap">
-      <div class="contact__form" data-reveal>
-        <form id="contactForm">
-          <input type="text" placeholder="Ваше имя" required />
-          <input type="email" placeholder="Ваш email" required />
-          <textarea placeholder="Сообщение" rows="5" required></textarea>
-          <button class="btn" type="submit">Отправить</button>
-        </form>
-        <p id="formNote" style="margin-top:1rem; font-size:1.4rem; color:green;"></p>
-      </div>
-
-      <iframe
-        id="map"
-        loading="lazy"
-        allowfullscreen
-        referrerpolicy="no-referrer-when-downgrade"
-        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3188.016083901585!2d71.43704357631398!3d51.12215747173064!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4245842d7cba53a3%3A0xc7bb9ab65ab1f493!2sKabanbay%20Batyr%20Ave%208%2C%20Astana!5e0!3m2!1sen!2skz!4v1708061789113!5m2!1sen!2skz">
-      </iframe>
-    </div>
-  </section>
-
-  <footer>
-    © 2025 BrightStudio. Все права защищены.
-  </footer>
-
-  <!-- SVG Sprite -->
-  <svg xmlns="http://www.w3.org/2000/svg" style="display:none;">
-    <symbol id="icon-camera" viewBox="0 0 24 24"><path d="M12 5a7 7 0 107 7 7 7 0 00-7-7zm0-3a10 10 0 11-10 10A10 10 0 0112 2z"/></symbol>
-    <symbol id="icon-edit" viewBox="0 0 24 24"><path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04a1.004 1.004 0 000-1.42l-2.34-2.34a1.004 1.004 0 00-1.42 0l-1.83 1.83 3.75 3.75 1.84-1.82z"/></symbol>
-    <symbol id="icon-rocket" viewBox="0 0 24 24"><path d="M12 2C8 2 4 6 4 10v3H2v5h2v4h5v-2h6v2h5v-4h2v-5h-2v-3c0-4-4-8-8-8z"/></symbol>
+  <!-- SVG SPRITE -->
+  <svg style="display:none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <symbol id="icon-target" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2a10 10 0 1010 10A10 10 0 0012 2z"/></symbol>
+    <symbol id="icon-film" viewBox="0 0 24 24"><path fill="currentColor" d="M4 4h16v16H4z"/></symbol>
+    <symbol id="icon-bolt" viewBox="0 0 24 24"><path fill="currentColor" d="M13 2L3 14h7v8l10-12h-7z"/></symbol>
+    <symbol id="icon-chart" viewBox="0 0 24 24"><path fill="currentColor" d="M4 20h16M4 10h4v10H4zM10 4h4v16h-4zM16 14h4v6h-4z"/></symbol>
+    <symbol id="icon-camera" viewBox="0 0 24 24"><path fill="currentColor" d="M12 5a7 7 0 107 7 7 7 0 00-7-7z"/></symbol>
+    <symbol id="icon-edit" viewBox="0 0 24 24"><path fill="currentColor" d="M3 17.25V21h3.75L17.8 9.94 14.06 6.2z"/></symbol>
+    <symbol id="icon-rocket" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2C8 2 4 6 4 10v3H2v5h2v4h5v-2h6v2h5v-4h2v-5h-2v-3c0-4-4-8-8-8z"/></symbol>
   </svg>
 
+  <!-- HEADER -->
+  <header class="header" role="banner">
+    <div class="container header__inner">
+      <a class="logo" href="#" aria-label="BrightStudio — на главную">
+        <div class="logo__mark" aria-hidden="true">B</div>
+        <div>
+          <div style="font-size:1.6rem">BrightStudio</div>
+          <div style="font-size:1.2rem;color:var(--muted);margin-top:.2rem">креативный видеопродакшн</div>
+        </div>
+      </a>
+
+      <nav role="navigation" aria-label="Главное меню">
+        <a class="nav__link" href="#why">Почему</a>
+        <a class="nav__link" href="#gallery">Галерея</a>
+        <a class="nav__link" href="#reviews">Отзывы</a>
+        <a class="nav__link" href="#contact">Контакты</a>
+      </nav>
+
+      <a class="cta" href="#contact">Заказать проект</a>
+    </div>
+  </header>
+
+  <main>
+    <!-- HERO -->
+    <section class="hero" aria-label="Приветственная секция">
+      <div class="hero__inner container">
+        <div class="hero__eyebrow">BrightStudio • Креатив</div>
+        <h1 class="hero__title">Делаем видео, которое продаёт и вдохновляет</h1>
+        <p class="hero__lead">Короткие кейсы, рекламные ролики и промо — от идеи и сценария до монтажа и продвижения. Быстро, красиво, под KPI.</p>
+        <div class="hero__actions">
+          <a class="cta" href="#contact" style="font-size:1.6rem;padding:.9rem 1.6rem">Обсудить проект</a>
+          <a class="nav__link" href="#why" style="background:transparent">Почему мы</a>
+        </div>
+      </div>
+
+      <div class="hero__media container" style="margin-top:2.4rem">
+        <!-- main hero image (responsive) -->
+        <picture>
+          <source media="(min-width:900px)" srcset="https://images.unsplash.com/photo-1508612761958-3a79f09c4b8f?q=80&w=1600&auto=format&fit=crop&s=7c6e6fbec7246c6f3b50f9f9a9a7b7b2">
+          <source media="(min-width:480px)" srcset="https://images.unsplash.com/photo-1508612761958-3a79f09c4b8f?q=80&w=1200&auto=format&fit=crop&s=7c6e6fbec7246c6f3b50f9f9a9a7b7b2">
+          <img src="https://images.unsplash.com/photo-1508612761958-3a79f09c4b8f?q=80&w=900&auto=format&fit=crop&s=7c6e6fbec7246c6f3b50f9f9a9a7b7b2"
+               alt="Оператор с камерой — съемочный процесс" loading="lazy" decoding="async">
+        </picture>
+      </div>
+    </section>
+
+    <!-- WHY -->
+    <section id="why" class="why container" aria-label="Почему выбирают BrightStudio">
+      <h2 class="section-title reveal">Почему выбирают BrightStudio</h2>
+
+      <div class="why__grid">
+        <article class="why__card reveal" aria-hidden="false">
+          <div class="why__icon" aria-hidden="true"><svg width="26" height="26"><use href="#icon-target"></use></svg></div>
+          <h3 class="why__title">Фокус на результате</h3>
+          <p class="why__text">Мы ориентируемся на метрики — лиды, просмотры, конверсии. Видео с бизнес-целью.</p>
+          <img class="why__img" src="https://images.unsplash.com/photo-1581093588401-22e8a8d1a1e4?q=80&w=1200&auto=format&fit=crop"
+               alt="Студийная съемка" loading="lazy" decoding="async">
+        </article>
+
+        <article class="why__card reveal">
+          <div class="why__icon" aria-hidden="true"><svg width="26" height="26"><use href="#icon-film"></use></svg></div>
+          <h3 class="why__title">Премиальное качество</h3>
+          <p class="why__text">Профессиональное оборудование и постобработка — киноуровень в каждом кадре.</p>
+          <img class="why__img" src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?q=80&w=1200&auto=format&fit=crop"
+               alt="Монтаж и постпродакшн" loading="lazy" decoding="async">
+        </article>
+
+        <article class="why__card reveal">
+          <div class="why__icon" aria-hidden="true"><svg width="26" height="26"><use href="#icon-bolt"></use></svg></div>
+          <h3 class="why__title">Быстро и организовано</h3>
+          <p class="why__text">Чёткий таймлайн, быстрые процессы и прозрачные отчеты по этапам.</p>
+          <img class="why__img" src="https://images.unsplash.com/photo-1547425260-76bcadfb4f2c?q=80&w=1200&auto=format&fit=crop"
+               alt="Команда на съемке" loading="lazy" decoding="async">
+        </article>
+      </div>
+    </section>
+
+    <!-- GALLERY -->
+    <section id="gallery" class="gallery container" aria-label="Галерея работ">
+      <h2 class="section-title reveal">Галерея — последние работы</h2>
+
+      <div class="gallery__grid reveal" style="margin-top:1.6rem">
+        <!-- 10 images from Unsplash (free-to-use). Replace with your own if needed. -->
+        <figure class="gallery__item"><img src="https://images.unsplash.com/photo-1520975914443-3a44f8f6f2a9?q=80&w=1000&auto=format&fit=crop" alt="Кадр 1" loading="lazy" decoding="async"><figcaption class="gallery__caption">Рекламный ролик — бренд</figcaption></figure>
+        <figure class="gallery__item"><img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=1000&auto=format&fit=crop" alt="Кадр 2" loading="lazy" decoding="async"><figcaption class="gallery__caption">Behind the scenes</figcaption></figure>
+        <figure class="gallery__item"><img src="https://images.unsplash.com/photo-1541542684-9b5f3f6f3a7a?q=80&w=1000&auto=format&fit=crop" alt="Кадр 3" loading="lazy" decoding="async"><figcaption class="gallery__caption">Интервью</figcaption></figure>
+        <figure class="gallery__item"><img src="https://images.unsplash.com/photo-1508921912186-1d1a45ebb3c1?q=80&w=1000&auto=format&fit=crop" alt="Кадр 4" loading="lazy" decoding="async"><figcaption class="gallery__caption">Короткометражка</figcaption></figure>
+
+        <figure class="gallery__item"><img src="https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?q=80&w=1000&auto=format&fit=crop" alt="Кадр 5" loading="lazy" decoding="async"><figcaption class="gallery__caption">Музыкальный клип</figcaption></figure>
+        <figure class="gallery__item"><img src="https://images.unsplash.com/photo-1504198453319-5ce911bafcde?q=80&w=1000&auto=format&fit=crop" alt="Кадр 6" loading="lazy" decoding="async"><figcaption class="gallery__caption">Реклама продукта</figcaption></figure>
+        <figure class="gallery__item"><img src="https://images.unsplash.com/photo-1496307042754-b4aa456c4a2d?q=80&w=1000&auto=format&fit=crop" alt="Кадр 7" loading="lazy" decoding="async"><figcaption class="gallery__caption">Event-видео</figcaption></figure>
+        <figure class="gallery__item"><img src="https://images.unsplash.com/photo-1476280440753-1f1404d0d30a?q=80&w=1000&auto=format&fit=crop" alt="Кадр 8" loading="lazy" decoding="async"><figcaption class="gallery__caption">Промо</figcaption></figure>
+
+        <figure class="gallery__item"><img src="https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?q=80&w=1000&auto=format&fit=crop" alt="Кадр 9" loading="lazy" decoding="async"><figcaption class="gallery__caption">Документальный стиль</figcaption></figure>
+        <figure class="gallery__item"><img src="https://images.unsplash.com/photo-1526178612366-4f6b6f6b5f9c?q=80&w=1000&auto=format&fit=crop" alt="Кадр 10" loading="lazy" decoding="async"><figcaption class="gallery__caption">Социальный проект</figcaption></figure>
+      </div>
+    </section>
+
+    <!-- REVIEWS -->
+    <section id="reviews" class="reviews container" aria-label="Отзывы">
+      <h2 class="section-title reveal">Отзывы клиентов</h2>
+
+      <div class="reviews__grid" style="margin-top:1.6rem">
+        <article class="review reveal">
+          <div class="review__avatar"><img src="https://images.unsplash.com/photo-1545996124-1b4a0f35b6af?q=80&w=400&auto=format&fit=crop" alt="Анна Петрова"></div>
+          <div class="review__meta">
+            <p class="review__text">«BrightStudio сделали промо-ролик для продукта — продажи и вовлечённость выросли. Понравилась скорость и креативность».</p>
+            <h4 class="review__name">Анна Петрова</h4>
+            <div class="review__role">Маркетинг-директор, NordSoft</div>
+          </div>
+        </article>
+
+        <article class="review reveal">
+          <div class="review__avatar"><img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?q=80&w=400&auto=format&fit=crop" alt="Иван Смирнов"></div>
+          <div class="review__meta">
+            <p class="review__text">«Спасибо команде за серию роликов для соцсетей. CPM снизился, удержание выросло — работаем дальше».</p>
+            <h4 class="review__name">Иван Смирнов</h4>
+            <div class="review__role">Основатель, CraftCoffee</div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- CONTACT + MAP -->
+    <section id="contact" class="contact container" aria-label="Контакты">
+      <h2 class="section-title reveal">Расскажите о проекте</h2>
+
+      <div class="contact__wrap" style="margin-top:1.6rem">
+        <div class="contact__left reveal">
+          <p style="margin:0;font-weight:700;color:#0b1220">Быстрая консультация и предварительная смета</p>
+          <p style="margin-top:.8rem;color:var(--muted)">Оставьте контакты — менеджер свяжется в рабочее время и уточнит все детали.</p>
+
+          <ul style="margin-top:1.4rem; padding-left:1.6rem; color:var(--muted)">
+            <li style="margin-bottom:.6rem">Сценарий и режиссура</li>
+            <li style="margin-bottom:.6rem">Операторская группа и техника</li>
+            <li style="margin-bottom:.6rem">Монтаж, цветокор, саунд-дизайн</li>
+            <li style="margin-bottom:.6rem">Локации и согласования</li>
+          </ul>
+
+          <div style="margin-top:1.4rem;color:var(--muted);font-size:1.3rem">
+            <strong>Наш адрес:</strong><br />
+            г. Астана, Кабанбай батыра 8
+          </div>
+        </div>
+
+        <form id="contactForm" class="contact__form reveal" action="#" novalidate>
+          <div class="field">
+            <label for="name">Имя</label>
+            <input id="name" name="name" type="text" placeholder="Как к вам обращаться?" required>
+          </div>
+
+          <div class="field">
+            <label for="email">Email</label>
+            <input id="email" name="email" type="email" placeholder="you@example.com" required>
+          </div>
+
+          <div class="field">
+            <label for="project">Кратко о задаче</label>
+            <textarea id="project" name="project" rows="4" placeholder="Что нужно: формат, куда публикуем, желаемый дедлайн..." required></textarea>
+          </div>
+
+          <div class="form-actions">
+            <button type="submit" class="cta" style="font-size:1.4rem;padding:.8rem 1.2rem">Отправить заявку</button>
+            <div class="note" id="formNote" style="font-size:1.2rem">Мы ответим в течение рабочего дня.</div>
+          </div>
+        </form>
+      </div>
+
+      <div style="margin-top:1.8rem" class="map-wrap reveal">
+        <!-- Google Maps embed: Kabanbay Batyr Ave 8, Astana -->
+        <iframe
+          id="gmap"
+          class="map-iframe"
+          loading="lazy"
+          allowfullscreen
+          referrerpolicy="no-referrer-when-downgrade"
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3188.016083901585!2d71.43704357631398!3d51.12215747173064!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4245842d7cba53a3%3A0xc7bb9ab65ab1f493!2sKabanbay%20Batyr%20Ave%208%2C%20Astana!5e0!3m2!1sen!2skz!4v1708061789113!5m2!1sen!2skz">
+        </iframe>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer role="contentinfo">
+    <div class="container" style="display:flex;flex-direction:column;gap:.8rem;align-items:center;justify-content:center">
+      <div style="display:flex;gap:1rem;align-items:center">
+        <div class="logo__mark" style="width:3.2rem;height:3.2rem;font-weight:800;font-size:1.4rem">B</div>
+        <div style="font-weight:700">BrightStudio</div>
+      </div>
+      <div style="color:var(--muted);font-size:1.2rem">© 2025 BrightStudio • Все права защищены</div>
+    </div>
+  </footer>
+
+  <!-- ---------- SCRIPTS: reveal, form, map appear, small parallax ---------- -->
   <script>
-    // Форма
-    document.getElementById("contactForm").addEventListener("submit", function(e) {
-      e.preventDefault();
-      document.getElementById("formNote").textContent = "Спасибо! Мы свяжемся с вами в ближайшее время.";
-      this.reset();
-    });
+    // Simple form handling (demo)
+    (function(){
+      const form = document.getElementById('contactForm');
+      const note = document.getElementById('formNote');
+      if(form){
+        form.addEventListener('submit', function(e){
+          e.preventDefault();
+          const name = form.name.value.trim();
+          const email = form.email.value.trim();
+          const project = form.project.value.trim();
+          if(!name || !email || !project){
+            note.textContent = 'Пожалуйста, заполните все поля.';
+            note.style.color = 'crimson';
+            return;
+          }
+          note.style.color = 'var(--muted)';
+          note.textContent = 'Отправка...';
+          setTimeout(()=>{
+            form.reset();
+            note.style.color = 'green';
+            note.textContent = 'Спасибо! Заявка отправлена — мы скоро свяжемся.';
+          }, 900);
+        });
+      }
+    })();
 
-    // Анимация появления элементов при скролле
-    const revealElements = document.querySelectorAll("[data-reveal]");
-    const map = document.getElementById("map");
+    // IntersectionObserver reveal + lazy map show
+    (function(){
+      const io = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+          if(entry.isIntersecting){
+            entry.target.classList.add('revealed');
+            // reveal map iframe specially
+            if(entry.target.id === 'gmap' || entry.target.classList.contains('map-iframe')){
+              entry.target.classList.add('visible');
+            }
+            observer.unobserve(entry.target);
+          }
+        });
+      }, {threshold: 0.12});
 
-    function revealOnScroll() {
-      const trigger = window.innerHeight * 0.85;
-      revealElements.forEach(el => {
-        const top = el.getBoundingClientRect().top;
-        if (top < trigger) el.classList.add("visible");
+      // observe revealable blocks
+      document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+      // additionally observe specific iframe (map)
+      const map = document.getElementById('gmap');
+      if(map) { io.observe(map); }
+
+      // also gallery & hero images are lazy; ensure they get 'revealed' visually too
+      document.querySelectorAll('.gallery__item, .hero__media, .why__img, .review').forEach(el => {
+        if(!el.classList.contains('reveal')) el.classList.add('reveal');
+        io.observe(el);
       });
-      if (map.getBoundingClientRect().top < window.innerHeight * 0.9)
-        map.classList.add("visible");
-    }
+    })();
 
-    window.addEventListener("scroll", revealOnScroll);
-    revealOnScroll(); // запустить при загрузке
-
-    // Параллакс эффект для hero
-    window.addEventListener("scroll", () => {
-      const hero = document.querySelector(".hero");
-      hero.style.backgroundPositionY = window.scrollY * 0.3 + "px";
-    });
+    // gentle parallax on scroll (background shift)
+    (function(){
+      const hero = document.querySelector('.hero');
+      if(!hero) return;
+      window.addEventListener('scroll', () => {
+        const offset = window.scrollY * 0.18;
+        hero.style.backgroundPosition = `center ${-offset}px`;
+      }, {passive:true});
+    })();
   </script>
 </body>
 </html>
